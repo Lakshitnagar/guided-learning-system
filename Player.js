@@ -1,4 +1,3 @@
-clear();
 // Loading jQuery
 jQueryScript = document.createElement('script');
 jQueryScript.type = 'text/javascript';
