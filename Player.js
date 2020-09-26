@@ -19,6 +19,10 @@ function __5szm2kaj(response) {
     }
 
     initStyling(response.data.css);
+
+    let currStep = response.data.structure.steps[0];
+
+    renderToolTip(response.data, currStep);
 }
 
 function initStyling(css) {
@@ -28,4 +32,49 @@ function initStyling(css) {
     let $head = $("head");
 
     $head.append($style);
+}
+
+function renderToolTip(tooltipData, currStep){
+    if(!currStep) return;
+
+    let currToolTip = getToolTip(tooltipData.tiplates);
+
+    $(currStep.action.selector).after(currToolTip);
+
+    $("div.tooltip").addClass(currStep.action.classes);
+    if(currStep.action.placement){
+        $("div.tooltip").addClass("in");
+        $("div.tooltip").addClass(currStep.action.placement);
+    }
+
+    const content = $.parseHTML(currStep.action.contents['#content']);
+    $("div[data-iridize-id='content']").append(content);
+}
+
+function getToolTip(tiplates) {
+    let $tipContainer = $('<div>', {
+        class: "sttip"
+    });
+    $tipContainer.css({
+        "position": "absolute",
+        "display": "inline",
+    });
+    let $tipParent = $('<div>', {
+        class: "tooltip"
+    });
+    $tipParent.css({
+        "position": "absolute",
+        "display": "flex",
+        "align-items": "center"
+    });
+    let $tipArrow = $('<div>', {
+        class: "tooltip-arrow"
+    });
+
+    let tipHtml = $.parseHTML(tiplates.tip);
+
+    $tipParent.append(tipHtml);
+    $tipContainer.append($tipParent);
+
+    return $tipContainer;
 }
