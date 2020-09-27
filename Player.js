@@ -17,6 +17,10 @@ function __5szm2kaj(response) {
         alert(`Guided Learning System : ${response.errormsg}`);
         return;
     }
+    if(!$) {
+        __5szm2kaj(response);
+        return;
+    }
     initStyling(response.data.css);
 
     let crossDomainStepId = getUrlParameter("GLSCurrStepId");
