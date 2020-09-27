@@ -42,6 +42,8 @@ function initStyling(css) {
     $head.append($style);
 }
 
+var prevStepId;
+
 // considering private function
 function renderToolTip(prevToolTipRef, tooltipData, currStep){
     if(prevToolTipRef) prevToolTipRef.remove();
@@ -84,7 +86,12 @@ function renderToolTip(prevToolTipRef, tooltipData, currStep){
     }
 
     $(".next-btn").click(function(){
+        prevStepId = currStep.id;
         renderToolTip(currToolTip, tooltipData, getStep(tooltipData.structure.steps, currStep.followers[0].next));
+    });
+
+    $(".prev-btn").click(function(){
+        renderToolTip(currToolTip, tooltipData, getStep(tooltipData.structure.steps, prevStepId));
     });
 }
 
