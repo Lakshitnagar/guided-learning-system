@@ -46,6 +46,11 @@ function renderToolTip(tooltipData, currStep){
         $("div.tooltip").addClass("in");
         $("div.tooltip").addClass(currStep.action.placement);
     }
+    $("div[aria-label='Steps']").css({
+        "border": "1px solid #dfe1e5",
+        "border-radius": "5px",
+        "padding": "5px"
+    });
 
     const content = $.parseHTML(currStep.action.contents['#content']);
     $("div[data-iridize-id='content']").append(content);
@@ -56,8 +61,9 @@ function getToolTip(tiplates) {
         class: "sttip"
     });
     $tipContainer.css({
+        "background-color": "#fff",
         "position": "absolute",
-        "display": "inline",
+        "display": "inline"
     });
     let $tipParent = $('<div>', {
         class: "tooltip"
@@ -67,10 +73,6 @@ function getToolTip(tiplates) {
         "display": "flex",
         "align-items": "center"
     });
-    let $tipArrow = $('<div>', {
-        class: "tooltip-arrow"
-    });
-
     let tipHtml = $.parseHTML(tiplates.tip);
 
     $tipParent.append(tipHtml);
