@@ -25,6 +25,7 @@ function __5szm2kaj(response) {
     renderToolTip(null, response.data, currStep);
 }
 
+// considering private function
 function initStyling(css) {
     var $style = $(`<style>${css}</style>`, {
         type: "text/css"
@@ -34,6 +35,7 @@ function initStyling(css) {
     $head.append($style);
 }
 
+// considering private function
 function renderToolTip(prevToolTipRef, tooltipData, currStep){
     if(!currStep) return;
 
@@ -62,6 +64,7 @@ function renderToolTip(prevToolTipRef, tooltipData, currStep){
     });
 }
 
+// considering private function
 function getToolTip(tiplates) {
     let $tipContainer = $('<div>', {
         class: "sttip"
@@ -87,6 +90,7 @@ function getToolTip(tiplates) {
     return $tipContainer;
 }
 
+// considering private function
 function getStep(steps, stepId) {
     return steps.find(step=>step.id === stepId);
 }
