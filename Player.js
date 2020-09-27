@@ -79,6 +79,9 @@ function renderToolTip(prevToolTipRef, tooltipData, currStep){
     $("div[data-iridize-id='content']").append(content);
     $("span[data-iridize-role='stepsCount']").text(tooltipData.structure.steps.length);
     $("span[data-iridize-role='stepCount']").text(currStep.action.stepOrdinal);
+    if(currStep.action.roleTexts && currStep.action.roleTexts.nextBt){
+        $(".next-btn").text(currStep.action.roleTexts.nextBt);
+    }
 
     $(".next-btn").click(function(){
         renderToolTip(currToolTip, tooltipData, getStep(tooltipData.structure.steps, currStep.followers[0].next));
