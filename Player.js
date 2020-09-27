@@ -22,7 +22,7 @@ function __5szm2kaj(response) {
 
     let currStep = response.data.structure.steps[0];
 
-    renderToolTip(response.data, currStep);
+    renderToolTip(null, response.data, currStep);
 }
 
 function initStyling(css) {
@@ -34,8 +34,10 @@ function initStyling(css) {
     $head.append($style);
 }
 
-function renderToolTip(tooltipData, currStep){
+function renderToolTip(prevToolTipRef, tooltipData, currStep){
     if(!currStep) return;
+
+    if(prevToolTipRef) prevToolTipRef.remove();
 
     let currToolTip = getToolTip(tooltipData.tiplates);
 
@@ -54,6 +56,10 @@ function renderToolTip(tooltipData, currStep){
 
     const content = $.parseHTML(currStep.action.contents['#content']);
     $("div[data-iridize-id='content']").append(content);
+
+    $(".next-btn").click(function(){
+        renderToolTip(currToolTip, tooltipData, getStep(tooltipData.structure.steps, currStep.followers[0].next));
+    });
 }
 
 function getToolTip(tiplates) {
@@ -79,4 +85,8 @@ function getToolTip(tiplates) {
     $tipContainer.append($tipParent);
 
     return $tipContainer;
+}
+
+function getStep(steps, stepId) {
+    return steps.find(step=>step.id === stepId);
 }
