@@ -17,7 +17,7 @@ function __5szm2kaj(response) {
         alert(`Guided Learning System : ${response.errormsg}`);
         return;
     }
-    if(!$) {
+    if(typeof $ === 'undefined') {
         __5szm2kaj(response);
         return;
     }
