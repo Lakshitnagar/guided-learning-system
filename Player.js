@@ -12,6 +12,9 @@ GLSScript.src = 'https://guidedlearning.oracle.com/player/latest/api/scenario/ge
 
 document.getElementsByTagName("head")[0].append(GLSScript);
 
+var GLSCurrStepIdKey = "GLSCurrStepId";
+var currStepId = sessionStorage.getItem(GLSCurrStepIdKey);
+
 function __5szm2kaj(response) {
     if (response.error === 1) {
         alert(`Guided Learning System : ${response.errormsg}`);
@@ -20,7 +23,8 @@ function __5szm2kaj(response) {
 
     initStyling(response.data.css);
 
-    let currStep = response.data.structure.steps[0];
+    console.log(typeof currStepId);
+    let currStep = currStepId !== "" ? getStep(response.data.structure.steps, currStepId) : response.data.structure.steps[0];
 
     renderToolTip(null, response.data, currStep);
 }
@@ -36,17 +40,18 @@ function initStyling(css) {
 }
 
 // considering private function
-function renderToolTip(prevToolTipRef, tooltipData, currStep){
-    if(!currStep) return;
+function renderToolTip(prevToolTipRef, tooltipData, currStep) {
+    if (!currStep) return;
 
-    if(prevToolTipRef) prevToolTipRef.remove();
+    sessionStorage.setItem(GLSCurrStepIdKey, currStep.id);
+    if (prevToolTipRef) prevToolTipRef.remove();
 
     let currToolTip = getToolTip(tooltipData.tiplates);
 
     $(currStep.action.selector).after(currToolTip);
 
     $("div.tooltip").addClass(currStep.action.classes);
-    if(currStep.action.placement){
+    if (currStep.action.placement) {
         $("div.tooltip").addClass("in");
         $("div.tooltip").addClass(currStep.action.placement);
     }
@@ -60,7 +65,7 @@ function renderToolTip(prevToolTipRef, tooltipData, currStep){
     const content = $.parseHTML(currStep.action.contents['#content']);
     $("div[data-iridize-id='content']").append(content);
 
-    $(".next-btn").click(function(){
+    $(".next-btn").click(function () {
         renderToolTip(currToolTip, tooltipData, getStep(tooltipData.structure.steps, currStep.followers[0].next));
     });
 }
@@ -93,5 +98,7 @@ function getToolTip(tiplates) {
 
 // considering private function
 function getStep(steps, stepId) {
-    return steps.find(step=>step.id === stepId);
+    return steps.find(step = > step.id === stepId
+)
+    ;
 }
