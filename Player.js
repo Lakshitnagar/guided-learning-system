@@ -53,7 +53,8 @@ function renderToolTip(prevToolTipRef, tooltipData, currStep){
     $("div[aria-label='Steps']").css({
         "border": "1px solid #dfe1e5",
         "border-radius": "5px",
-        "padding": "5px"
+        "padding": "5px",
+        "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
     });
 
     const content = $.parseHTML(currStep.action.contents['#content']);
