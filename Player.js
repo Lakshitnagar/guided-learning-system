@@ -18,7 +18,9 @@ function __5szm2kaj(response) {
         return;
     }
     if(typeof $ === 'undefined') {
-        __5szm2kaj(response);
+        setTimeout(()=>{
+            __5szm2kaj(response);
+    }, 1000);
         return;
     }
     initStyling(response.data.css);
@@ -64,13 +66,16 @@ function renderToolTip(prevToolTipRef, tooltipData, currStep){
         $("div.tooltip").addClass(currStep.action.placement);
     }
     $("div[aria-label='Steps']").css({
+        "background-color": "#fff",
         "border": "1px solid #dfe1e5",
         "border-radius": "5px",
         "padding": "5px",
-        "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+        "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+        "min-width": "330px"
     });
 
     const content = $.parseHTML(currStep.action.contents['#content']);
+    $("div.popover-title").prepend("Guided Learning System");
     $("div[data-iridize-id='content']").append(content);
     $("span[data-iridize-role='stepsCount']").text(tooltipData.structure.steps.length);
     $("span[data-iridize-role='stepCount']").text(currStep.action.stepOrdinal);
@@ -86,7 +91,6 @@ function getToolTip(tiplates) {
         class: "sttip"
     });
     $tipContainer.css({
-        "background-color": "#fff",
         "position": "absolute",
         "display": "inline"
     });
