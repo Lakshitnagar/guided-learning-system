@@ -17,10 +17,11 @@ function __5szm2kaj(response) {
         alert(`Guided Learning System : ${response.errormsg}`);
         return;
     }
-
     initStyling(response.data.css);
 
-    let currStep = response.data.structure.steps[0];
+    let crossDomainStepId = getUrlParameter("GLSCurrStepId");
+
+    let currStep = crossDomainStepId ? getStep(response.data.structure.steps, crossDomainStepId) : response.data.structure.steps[0];
 
     renderToolTip(null, response.data, currStep);
 }
@@ -37,11 +38,19 @@ function initStyling(css) {
 
 // considering private function
 function renderToolTip(prevToolTipRef, tooltipData, currStep){
-    if(!currStep) return;
-
+    if(prevToolTipRef) prevToolTipRef.remove();
+    if(!currStep || currStep.id==="eol0") return;
     if(prevToolTipRef) prevToolTipRef.remove();
 
+    if(currStep.next && currStep.next.event==="click"){
+        $(currStep.action.selector).attr('href', $(currStep.action.selector).attr('href')+"&GLSCurrStepId="+currStep.followers[0].next);
+    }
+
     let currToolTip = getToolTip(tooltipData.tiplates);
+
+    if($(currStep.action.selector).length===0 && currStep.action.selector==="input[value=\"Google Search\"]"){
+        currStep.action.selector = "button[aria-label=\"Google Search\"] div";
+    }
 
     $(currStep.action.selector).after(currToolTip);
 
@@ -95,3 +104,18 @@ function getToolTip(tiplates) {
 function getStep(steps, stepId) {
     return steps.find(step=>step.id === stepId);
 }
+
+function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
