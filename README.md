@@ -11,4 +11,6 @@ Open `test/tests.html` in any browser to run all tests.
 
 ### Build files
 
-Run `npm run build` on root directory of the project.
+Oon root directory of the project:\
+Run `npm install`\
+Run `npm run build` 
