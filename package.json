@@ -1,0 +1,25 @@
+{
+  "name": "guided-learning-system",
+  "version": "1.0.0",
+  "description": "Guided Learning System for google.com",
+  "main": "Player.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "minify Player.js > Player.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lakshitnagar/guided-learning-system.git"
+  },
+  "author": "lakshitnagar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lakshitnagar/guided-learning-system/issues"
+  },
+  "homepage": "https://github.com/Lakshitnagar/guided-learning-system#readme",
+  "devDependencies": {
+    "minify": "^6.0.0"
+  }
+}
