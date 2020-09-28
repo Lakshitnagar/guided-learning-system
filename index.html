@@ -1,0 +1,71 @@
+<html>
+<head>
+    <title>Guided Learning System</title>
+    <style>
+        body {
+            font-family: "Arial";
+        }
+
+        #wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .button {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            padding: 25px 60px;
+            margin: 0;
+            font-size: 50px;
+            line-height: 60px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            color: transparent;
+            box-shadow: 0 0 0 1px #2DC6D6;
+            border: 0;
+            background: #fff;
+            cursor: alias;
+            position: relative;
+        }
+
+        #bmarklet::after {
+            content: '+ Drag to install';
+            color: #2DC6D6;
+            position: absolute;
+            left: 30px;
+        }
+
+        ol {
+            width: 600px;
+            padding-bottom: 10px;
+            font-size: 20px;
+            color: #818181;
+        }
+
+        ol li {
+            padding-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrapper">
+    <ol start="1">
+        <li>Drag the button below onto your browsers bookmarks bar</li>
+        <li>Open <b>Google.com</b></li>
+        <li>Click on newly added bookmark (GLS - Google)</li>
+        <li>Guided Learning System will begin</li>
+        <li>If not, please refresh page and click again on bookmark</li>
+    </ol>
+
+    <a id="bmarklet" class="button" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://lakshitnagar.github.io/guided-learning-system/Player.min.js'})();">GLS - Google</a>
+</div>
+</body>
+</html>
