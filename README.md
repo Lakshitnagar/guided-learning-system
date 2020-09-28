@@ -6,4 +6,4 @@ Open `test/tests.html` in any browser to run all tests.
 
 ### Run Application
  
-Go to `https://github.com/Lakshitnagar/guided-learning-system` and follow the instructions.
+Go to `https://lakshitnagar.github.io/guided-learning-system/` and follow the instructions.
