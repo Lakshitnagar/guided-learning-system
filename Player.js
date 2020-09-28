@@ -29,6 +29,9 @@ function __5szm2kaj(response) {
 
     let currStep = crossDomainStepId ? getStep(response.data.structure.steps, crossDomainStepId) : response.data.structure.steps[0];
 
+    if($(".sttip")){
+        $(".sttip").remove();
+    }
     renderToolTip(null, response.data, currStep);
 }
 
@@ -85,13 +88,22 @@ function renderToolTip(prevToolTipRef, tooltipData, currStep){
         $(".next-btn").text(currStep.action.roleTexts.nextBt);
     }
 
+    // Adding behaviour
     $(".next-btn").click(function(){
         prevStepId = currStep.id;
         renderToolTip(currToolTip, tooltipData, getStep(tooltipData.structure.steps, currStep.followers[0].next));
     });
 
-    $(".prev-btn").click(function(){
+    $("button[data-iridize-role='prevBt']").click(function(){
         renderToolTip(currToolTip, tooltipData, getStep(tooltipData.structure.steps, prevStepId));
+    });
+
+    $("button[data-iridize-role='closeBt']").click(function(){
+        currToolTip.remove();
+    });
+
+    $("button[data-iridize-role='laterBt']").click(function(){
+        currToolTip.remove();
     });
 }
 
